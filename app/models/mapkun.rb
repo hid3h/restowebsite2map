@@ -1,3 +1,4 @@
+# どういう時にどんな処理を行うか知っている
 class Mapkun
   attr_reader :line_event
 
@@ -6,10 +7,9 @@ class Mapkun
   end
 
   def excute
-    # textにurlが含まれていたら、スクレイピングする
     if line_event.has_url?
       # 地図を返信してください
-      locations = Location.fetch(urls: line_event.urls)
+      Location.new(line_event: line_event).excute
     end
   end
 end

@@ -3,7 +3,8 @@ class Api::V1::WebhookController < ApplicationController
   def receive
     return unless validate_sinature
     line_event = LineEvent.new(events: params['events'])
-    Mapkun.new(line_event: line_event).excute
+    temp = Location.new(line_event: line_event)
+    temp.execute if temp.executable?
   end
 
   def test
