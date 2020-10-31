@@ -1,6 +1,4 @@
-require 'open-uri'
-
-class Scraper
+class Location
 
   SCRAPER_CANDIDATES = [
     Nokogiri::Tabelog
@@ -12,28 +10,32 @@ class Scraper
   end
 
   def title
-    @scraper.title
+    scraper.title
   end
 
   def address
-    @scraper.address
+    scraper.address
   end
 
   def latitude
-    @scraper.latitude
+    scraper.latitude
   end
 
   def longitude
-    @scraper.longitude
+    scraper.longitude
   end
 
   private
+
+  def scraper
+    @scraper
+  end
   
   def set_scraper
     SCRAPER_CANDIDATES.each do |candidate|
       next unless candidate.scrapable?(@url)
 
-      @scraper = candidate.new(doc: Nokogiri::HTML(URI.open(@url)))
+      @scraper = candidate.new(url: @url)
       return
     end
   end

@@ -1,21 +1,14 @@
-class Nokogiri::Tabelog
-  class << self
-    def scrapable?(url)
-      # TODO 食べログURL判定
-      true
-    end
-  end
-
-  def initialize(doc:)
-    @doc = doc
+class Nokogiri::Tabelog < Nokogiri::Scraper
+  def self.scrapable?(url)
+    url.include?("tabelog.com")
   end
 
   def title
-    @doc.css('.p-header__title > h1')[0].text
+    doc.css('.p-header__title > h1')[0].text
   end
 
   def address
-    @doc.css('.rstinfo-table__address')[0].text
+    doc.css('.rstinfo-table__address')[0].text
   end
 
   def latitude
@@ -29,7 +22,7 @@ class Nokogiri::Tabelog
   private
 
   def data_print_url
-    @data_print_url ||= @doc.css('.js-rstinfo-print-popup')[0].attribute('data-print-url').value
+    @data_print_url ||= doc.css('.js-rstinfo-print-popup')[0].attribute('data-print-url').value
   end
 
   def query_hash

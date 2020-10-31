@@ -10,13 +10,15 @@ class LocationReplyer
   def execute
     message_hash = {}
     urls.each do |url|
-      scraper = Scraper.new(url: url)
+      location = Location.new(url: url)
+      next unless location
+
       message_hash = {
         type:      'location',
-        title:     scraper.title,
-        address:   scraper.address,
-        latitude:  scraper.latitude,
-        longitude: scraper.longitude
+        title:     location.title,
+        address:   location.address,
+        latitude:  location.latitude,
+        longitude: location.longitude
       }
 
       # 今のとこひとつだけ返す
