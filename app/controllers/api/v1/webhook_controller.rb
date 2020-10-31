@@ -1,7 +1,10 @@
 class Api::V1::WebhookController < ApplicationController
   # https://developers.line.biz/ja/reference/messaging-api/#webhooks
   def receive
-    return unless validate_sinature
+    unless validate_sinature
+      return render status: 401, json: { status: 401, message: 'Unauthorized' }
+    end
+
     line_event = LineEvent.new(events: params['events'])
     temp = Location.new(line_event: line_event)
     temp.execute if temp.executable?

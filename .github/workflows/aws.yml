@@ -26,13 +26,16 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.5
+    
+    - name: create .env file
+      run: |
+        echo "LINE_CHANNEL_TOKEN=${{ secrets.LINE_CHANNEL_TOKEN }}" > .env.production
+        echo "LINE_CHANNEL_SECRET=${{ secrets.LINE_CHANNEL_SECRET }}" > .env.production
     - name: jets deploy
       env:
         JETS_AGREE: yes
-        LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
-        LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
       run: |
         sudo apt-get -yqq install libpq-dev
         bundle update --bundler
         bundle install
-        LINE_CHANNEL_TOKEN=$LINE_CHANNEL_TOKEN LINE_CHANNEL_SECRET=$LINE_CHANNEL_SECRET jets deploy production
+        jets deploy production
