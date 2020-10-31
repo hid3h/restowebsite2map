@@ -1,5 +1,14 @@
 Jets.application.routes.draw do
-  root "jets/public#show"
+  # root "jets/public#show"
+  
+  # get "/api/v1", to: 'application#health'
+
+  namespace 'api' do
+    namespace 'v1' do
+      post 'webhook', to: 'webhook#receive'
+      get 'test', to: 'webhook#test'
+    end
+  end
 
   # The jets/public#show controller can serve static utf8 content out of the public folder.
   # Note, as part of the deploy process Jets uploads files in the public folder to s3
