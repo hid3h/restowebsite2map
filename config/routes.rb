@@ -1,7 +1,7 @@
 Jets.application.routes.draw do
   # root "jets/public#show"
   
-  get "/api/v1", to: 'application#health'
+  # get "/api/v1", to: 'application#health'
 
   namespace 'api' do
     namespace 'v1' do
