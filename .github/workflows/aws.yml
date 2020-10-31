@@ -30,7 +30,7 @@ jobs:
       run: |
         sudo apt-get -yqq install libpq-dev
         bundle install
-        bundle exec AWS_REGION=ap-northeast-1 jets deploy
+        bundle exec jets deploy
 
 
     
