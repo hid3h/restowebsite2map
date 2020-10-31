@@ -35,4 +35,4 @@ jobs:
         sudo apt-get -yqq install libpq-dev
         bundle update --bundler
         bundle install
-        LINE_CHANNEL_TOKEN=$LINE_CHANNEL_TOKEN LINE_CHANNEL_SECRET=$LINE_CHANNEL_SECRET bundle exec jets deploy production
+        LINE_CHANNEL_TOKEN=$LINE_CHANNEL_TOKEN LINE_CHANNEL_SECRET=$LINE_CHANNEL_SECRET jets deploy production
