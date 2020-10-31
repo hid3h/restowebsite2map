@@ -1,15 +1,13 @@
-class Location
+class LocationReplyer
   def initialize(line_event:)
     @line_event = line_event
   end
 
   def executable?
-    URI.extract(text).empty?
+    !urls.empty?
   end
 
   def execute
-    urls = URI.extract(text)
-
     message_hash = {}
     urls.each do |url|
       scraper = Scraper.new(url: url)
@@ -32,6 +30,10 @@ class Location
   end
 
   private
+
+  def urls
+    URI.extract(text)
+  end
 
   def text
     @line_event.text

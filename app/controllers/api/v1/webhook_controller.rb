@@ -6,7 +6,7 @@ class Api::V1::WebhookController < ApplicationController
     end
 
     line_event = LineEvent.new(events: params['events'])
-    temp = Location.new(line_event: line_event)
+    temp = LocationReplyer.new(line_event: line_event)
     temp.execute if temp.executable?
 
     render :json => 'ok'
