@@ -22,10 +22,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
     
-    - name: Set up Ruby 2.5.3
+    - name: Set up Ruby 2.5
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.5.3
+        ruby-version: 2.5
     - name: jets deploy
       run: |
         sudo apt-get -yqq install libpq-dev
