@@ -21,5 +21,16 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
+    
+    - name: Set up Ruby 2.5.3
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.5.3
+    - name: jets deploy
+      run: |
+        sudo apt-get -yqq install libpq-dev
+        bundle install
+        bundle exec AWS_REGION=ap-northeast-1 jets deploy
+
 
     
