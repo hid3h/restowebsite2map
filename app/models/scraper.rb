@@ -1,33 +1,37 @@
 class Scraper
 
-  SCRAPERS = [
+  SCRAPER_CANDIDATES = [
     Nokogiri::Tabelog
   ]
 
   def initialize(url:)
     @url = url
-    set_scraper_type
+    set_scraper
   end
 
-  def fetch_location
-    raise if @scraper.nil?
-    @doc = Nokogiri::HTML(URI.open(url))
-    @scraper.extract_location(@doc)
-    # {
-    #   title: @scraper.title,
-    #   address: @scraper.address,
-    #   latitude: @scraper.latitude,
-    #   longitude: @scraper.longitude
-    # }
+  def title
+    @scraper.title
+  end
+
+  def address
+    @scraper.address
+  end
+
+  def latitude
+    @scraper.latitude
+  end
+
+  def longitude
+    @scraper.longitude
   end
 
   private
   
-  def set_scraper_type
-    SCRAPERS.each do |scraper|
-      obj = scraper.new(url: @url)
-      next unless obj.scrapable?
-      @scraper = obj
+  def set_scraper
+    SCRAPER_CANDIDATES.each do |candidate|
+      next unless candidate.scrapable?(@url)
+
+      @scraper = candidate.new(doc: Nokogiri::HTML(URI.open(@url)))
       return
     end
   end

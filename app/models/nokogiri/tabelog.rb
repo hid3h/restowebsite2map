@@ -1,14 +1,13 @@
 class Nokogiri::Tabelog
-  def initialize(url:)
-    @url = url
+  class << self
+    def scrapable?(url)
+      # TODO 食べログURL判定
+      true
+    end
   end
 
-  def scrapable?
-    # TODO 食べログURL判定
-    true
-  end
-
-  def extract_location(nokogiri_doc)
+  def initialize(doc:)
+    @doc = doc
   end
 
   def title

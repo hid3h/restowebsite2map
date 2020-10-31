@@ -4,23 +4,41 @@ class Location
   end
 
   def executable?
+    return false if URI.extract(text).empty?
     true
   end
 
-  def excute
-    # mapを取得して
-    location_map = Scraper.new(url: url).scrape
-    # replyする
-    message_hash = {
-      type:      'location',
-      title:     location_map.title,
-      address:   location_map.address,
-      latitude:  location_map.latitude,
-      longitude: location_map.longitude
-    }
-    reply_message(
+  def execute
+    urls = URI.extract(text)
+
+    message_hash = {}
+    urls.each do |url|
+      scraper = Scraper.new(url: url)
+      message_hash = {
+        type:      'location',
+        title:     scraper.title,
+        address:   scraper.address,
+        latitude:  scraper.latitude,
+        longitude: scraper.longitude
+      }
+
+      # 今のとこひとつだけ返す
+      break if message_hash.all?
+    end
+
+    line_bot_client.reply_message(
       reply_token: @line_event.reply_token,
       message: message_hash
     )
+  end
+
+  private
+
+  def text
+    @line_event.text
+  end
+
+  def line_bot_client
+    @line_bot_client ||= LineBotClient.new
   end
 end
