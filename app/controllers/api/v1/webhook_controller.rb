@@ -15,14 +15,13 @@ class Api::V1::WebhookController < ApplicationController
 
   private
 
-  # TODO
   def validate_sinature
-    return true
-    p "request", request.headers
-    http_request_body = request.raw_post # Request body string
+    http_request_body = request.body.read # Request body string
+    p "http_request_body", http_request_body
     hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, channel_secret, http_request_body)
     signature = Base64.strict_encode64(hash)
     # Compare X-Line-Signature request header string and the signature
+    p "signature == request.headers['X-Line-Signature']", signature == request.headers['X-Line-Signature']
     signature == request.headers['X-Line-Signature']
   end
 
