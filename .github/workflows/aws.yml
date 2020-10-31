@@ -33,4 +33,4 @@ jobs:
         sudo apt-get -yqq install libpq-dev
         bundle update --bundler
         bundle install
-        bundle exec jets deploy production
+        bundle exec LINE_CHANNEL_TOKEN=YOUR_USER_KEY LINE_CHANNEL_SECRET=YOUR_USER_SECRET_KEY jets deploy production
