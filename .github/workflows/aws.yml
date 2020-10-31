@@ -30,7 +30,8 @@ jobs:
     - name: create .env file
       run: |
         echo "LINE_CHANNEL_TOKEN=${{ secrets.LINE_CHANNEL_TOKEN }}" > .env.production
-        echo "LINE_CHANNEL_SECRET=${{ secrets.LINE_CHANNEL_SECRET }}" > .env.production
+        echo "LINE_CHANNEL_SECRET=${{ secrets.LINE_CHANNEL_SECRET }}" >> .env.production
+  
     - name: jets deploy
       env:
         JETS_AGREE: yes
