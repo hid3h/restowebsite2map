@@ -1,5 +1,5 @@
 Jets.application.configure do
-  config.project_name = "myapp"
+  config.project_name = "resto2map"
   config.mode = "api"
 
   config.prewarm.enable = true # default is true
