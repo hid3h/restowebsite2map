@@ -4,8 +4,7 @@ class Location
   end
 
   def executable?
-    return false if URI.extract(text).empty?
-    true
+    URI.extract(text).empty?
   end
 
   def execute
