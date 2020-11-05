@@ -13,7 +13,10 @@ class Api::V1::WebhookController < ApplicationController
   end
 
   def test
-    render :json => "test"
+    url = params[:url]
+    location = Location.new(url: url)
+
+    render :json => {test: location.title || 'value'}
   end
 
   private

@@ -1,41 +1,42 @@
 class Location
 
-  SCRAPER_CANDIDATES = [
+  CLIENT_CANDIDATES = [
+    Client::Hotpepper,
     Nokogiri::Tabelog
   ]
 
   def initialize(url:)
     @url = url
-    set_scraper
+    set_client
   end
 
   def title
-    scraper.title
+    client.title
   end
 
   def address
-    scraper.address
+    client.address
   end
 
   def latitude
-    scraper.latitude
+    client.latitude
   end
 
   def longitude
-    scraper.longitude
+    client.longitude
   end
 
   private
 
-  def scraper
-    @scraper
+  def client
+    @client
   end
   
-  def set_scraper
-    SCRAPER_CANDIDATES.each do |candidate|
-      next unless candidate.scrapable?(@url)
+  def set_client
+    CLIENT_CANDIDATES.each do |candidate|
+      next unless candidate.requestable?(@url)
 
-      @scraper = candidate.new(url: @url)
+      @client = candidate.new(url: @url)
       return
     end
   end

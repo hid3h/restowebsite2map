@@ -1,5 +1,5 @@
 class Nokogiri::Tabelog < Nokogiri::Scraper
-  def self.scrapable?(url)
+  def self.requestable?(url)
     url.include?("tabelog.com")
   end
 
