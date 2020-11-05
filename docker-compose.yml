@@ -13,7 +13,6 @@ services:
       - 2001:8888
     volumes:
       - ./:/myapp
-      - .aws:/root/.aws
     environment:
       JETS_ENV: development
 
