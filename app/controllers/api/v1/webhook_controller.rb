@@ -1,7 +1,7 @@
 class Api::V1::WebhookController < ApplicationController
   # https://developers.line.biz/ja/reference/messaging-api/#webhooks
   def receive
-    unless validate_sinature
+    unless validate_signature
       return render status: 401, json: { status: 401, message: 'Unauthorized' }
     end
 
@@ -18,7 +18,7 @@ class Api::V1::WebhookController < ApplicationController
 
   private
 
-  def validate_sinature
+  def validate_signature
     http_request_body = request.body.read # Request body string
     hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, channel_secret, http_request_body)
     signature = Base64.strict_encode64(hash)
