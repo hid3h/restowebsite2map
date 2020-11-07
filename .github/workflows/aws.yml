@@ -31,6 +31,7 @@ jobs:
       run: |
         echo "LINE_CHANNEL_TOKEN=${{ secrets.LINE_CHANNEL_TOKEN }}" > .env.production
         echo "LINE_CHANNEL_SECRET=${{ secrets.LINE_CHANNEL_SECRET }}" >> .env.production
+        echo "HOTPEPPER_API_KEY=${{ secrets.HOTPEPPER_API_KEY }}" >> .env.production
   
     - name: jets deploy
       env:

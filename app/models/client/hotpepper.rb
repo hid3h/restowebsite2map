@@ -55,6 +55,6 @@ class Client::Hotpepper
   end
 
   def api_key
-    "xxxxxxxxx"
+    ENV["HOTPEPPER_API_KEY"]
   end
 end
