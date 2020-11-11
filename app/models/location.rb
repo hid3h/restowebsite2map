@@ -1,7 +1,8 @@
 class Location
 
   CLIENT_CANDIDATES = [
-    Client::Hotpepper,
+    # Client::Hotpepper,
+    Client::Gurunavi,
     Nokogiri::Tabelog
   ]
 
